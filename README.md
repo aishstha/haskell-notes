@@ -23,3 +23,30 @@ Ok, one module loaded.
 *Main> 
 ```
 
+:quit
+Quits GHCi. You can also quit by typing control-D at the prompt.
+
+:reload
+Attempts to reload the current target set (see :load) if any of the modules in the set, or any dependent module, has changed. Note that this may entail loading new modules, or dropping modules which are no longer indirectly required by the target.
+
+```
+*Main> take (double 2) [1,2,4]
+[1,2,4]
+*Main> take (double 2) [1,2,3,4,5,6,7,8]
+[1,2,3,4]
+```
+
+* x `f` y is syntactic sugar for f x y. x `f` y is infix operator
+
+```
+factorial n = product [1..n]
+average ns = sum ns `div` length ns
+```
+Processing: 
+``` 
+> factorial 10
+> avarage [1,2,3,4,5]
+```
+
+
+
