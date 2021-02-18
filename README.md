@@ -2,7 +2,7 @@
 # haskell-notes
 
 ## second class : Type and Type class
-
+* Type starts with uppercase and type variable starts with lowercase -  length :: [a] -> Int
 * Type error
 * Every syntactically well-formed expression has a type and that type is calculated by the compiler at compile-time using a process called type inference. 
 * In haskell type errors are found in complie time.
@@ -46,6 +46,49 @@ That is currying.Intentet by Haskell B. Curry.
 * For example if we have this function add' that was defined in a curried way, we can define a function that increments a value with 1 by partially applying add' to one. If we look at that type there add' 1 is a function that takes an integer and returns another integer.
 > add' 1 :: Int -> Int
 *
->mult x y z MEANS >((mult x) y) z
+>mult x y z 
+MEANS >((mult x) y) z
 Unless you're using explicit tuples, all functions in Haskell are normally defined in curried form.
 
+## Type classes and polymorphic functions
+Polymorphic functions are functions that are not defined on concrete types but that are defined using type variables.
+> length :: [a] -> Int
+
+For any type, length takes a list of calues of type a and returns an integer
+
+> length [1,2,3]
+Result: 4
+
+###syntax
+```
+head :: [a] -> a
+take :: Int -> [a] -> [a]
+
+*Main> take 1 [1,2,3]
+[1]
+
+```
+take takes a number and a list, takes the first n elements from the list and returns that list.
+
+```
+zip :: [a] -> [b] -> [(a,b)]
+
+*Main> zip [1,2,3] [4,5,6]
+[(1,4),(2,5),(3,6)]
+```
+zip takes the two lists and takes each element of these two lists and combines them into a tuple. 
+
+```
+id :: a -> a
+
+*Main> id 1
+1
+*Main> id 'a'
+'a'
+```
+Identity function returns it's value. Reference Phill Wadler's paper 'Theorems for Free'
+
+## Overloaded Function
+A polymorphic function is called overloaded if its type contains one or more class constraints
+> sum :: Num a => [a] -> a
+For any numeric type a, sum takes a list of values of type a and returns a value of type a.
