@@ -36,7 +36,7 @@ Attempts to reload the current target set (see :load) if any of the modules in t
 [1,2,3,4]
 ```
 
-* x `f` y is syntactic sugar for f x y. x `f` y is infix operator
+* `x `f` y` is syntactic sugar for f x y. `x `f` y` is infix operator
 
 ```
 factorial n = product [1..n]
