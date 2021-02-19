@@ -1,6 +1,7 @@
 # haskell-notes
 
-## introduction
+## First class - Introduction 
+
 * haskell script has .hs suffix
 * initial setup
   * create test.hs
