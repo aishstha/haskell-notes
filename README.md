@@ -92,3 +92,27 @@ Identity function returns it's value. Reference Phill Wadler's paper 'Theorems f
 A polymorphic function is called overloaded if its type contains one or more class constraints
 > sum :: Num a => [a] -> a
 For any numeric type a, sum takes a list of values of type a and returns a value of type a.
+
+* In haskell, you can also define your own type classes
+* Tried out:
+```
+*Main> : ['a', 'b']
+['a', 'b'] :: [Char]
+*Main> :t ('a','b')
+('a','b') :: (Char, Char)
+*Main> [(False, '0')]
+[(False,'0')]
+*Main> [tail, init, reverse]
+```
+
+Example:
+```
+
+second xs = head (tail xs)
+swap (x,y) = (y,x)
+pair x y = (x,y)
+double x = x*2
+palindrome xs = reverse xs == xs
+twice f x = f (f x)
+```
+
