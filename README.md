@@ -1,129 +1,136 @@
+
 # haskell-notes
 
-## First class - Introduction 
+## Defining Functions
 
-* haskell script has .hs suffix
-* initial setup
-  * create test.hs
-  * go in terminal of this file location and perform 
-    > ghci test
+### Conditional Expression
+In Haskell you write a conditional you write if then else. 
+           - In Haskell conditionals are expressions, not statements.
+           - Haskell programmers rather write guarded equations than conditional expressions.
+```   
+abs :: Int -> Int
+abs n = if n >= 0 then n else -n
+Condiitonal statement must always have an else branch.
+```
+Nested condition
+```
+signun n = if n < 0 the -1 else
+            if n == 0 then 0 else 1
+```
+Guarded Equation (preferred by Haskell people)
+Function starts with a conditional.
+```
+abs n | n >= 0          = n 
+      | otherwise       = -n
+```
+The absolute value of n is n when n is greater than or equal to 0 or it's -n otherwise. And otherwise is just another alias for false. 
 
-test.hs
-```
-double x = x + x
-quad x = double (double x)
-```
-
-```
-fm-pc-lt-153@fmpclt153-Predator-PH315-52 ~/Documents/projPersonal/code-snippets (master)$ ghci test
-GHCi, version 8.6.5: http://www.haskell.org/ghc/  :? for help
-[1 of 1] Compiling Main             ( test.hs, interpreted )
-Ok, one module loaded.
-*Main> double 2
-4
-*Main> 
-```
-:quit
-Quits GHCi. You can also quit by typing control-D at the prompt.
-
-:reload
-Attempts to reload the current target set (see :load) if any of the modules in the set, or any dependent module, has changed. Note that this may entail loading new modules, or dropping modules which are no longer indirectly required by the target.
+Guarded equations can be used t make definitions involvign multiple conditions easier to read.
 
 ```
-*Main> take (double 2) [1,2,4]
-[1,2,4]
-*Main> take (double 2) [1,2,3,4,5,6,7,8]
+signun n | n < 0        = -1
+         | n == 0       = 0
+         | otherwise    = 1
+```
+Pattern matching (define functions using pattern matching)
+In Haskell you can use pattern matching directly when you define functions. _ is placeholder while doing pattern matching, ie can be anyvalue.
+```
+not False = True
+(&&) :: Bool -> Bool -> Bool
+_ && _ = False
+
+AND GATE:
+
+True && b = b
+False && _ = False
+
+```
+Imp because:
+- It avoids evaluating the second argument if the first argument is False.
+- Patterns are matched in order. Left to right, top to button.
+- Define functions over lists using pattern matching:
+```
+_ && _ = False
+True && True = True
+```
+- Patterns may not repeat variables. 
+```
+ERROR CASE:
+
+b && b = b
+_ && _ = False
+```
+List Patterns
+```
 [1,2,3,4]
-```
-```
-* x `f` y is syntactic sugar for f x y. 
- * x `f` y is infix operator
- * (+) 2 2 is infix form of 2 + 2
-```
+MEANS:
+1:(2:(3:(4:[])))
 
-```
-factorial n = product [1..n]
-average ns = sum ns `div` length ns
-```
-Processing: 
-``` 
-> factorial 10
-> avarage [1,2,3,4,5]
-```
+head :: [a] -> a
+MEANS
+head (x:_) = x
 
-* function and parameter name must begin with lowercase
-  * we can even use regular quotes for function name as well. eg: x'
-* type name has to be in uppercase
-* xs, that means a list of values of type x and this is a list of values. xss list of list
-* haskell identifiers are short so you don't it elements, you call it xs.
-* whitespace is significant ie `layout rule` / `implicit grouping`
-```
-a = b + c
-    where 
-      b = 1
-      c = 2
-d = a * 2
-```
-* useful commands
- * :load name
- * :edit name
- * :edit ---- this edits current scrpit
- * :type expr -----gets type of expression
- * :? ----show all command
+tail :: [a] -> [a]
+MEANS
+tail (_:xs) = xs
 
-Syntax
+head and tail map any non-empty list to its first and remaining elements.
 ```
-avg = a `div` length xs
-    where 
-        a = 10  
-        xs = [1,2]
-```
-Result: 5
+* x:xs patterns only match non-empty lists
+> head [] = ERROR
+* x:xs patterns must be parenthesised, because application has priority over (:). 
+> head x:_ = x = ERROR
 
-* Haskell has several types, for instance Boolean values and strings.
-* Eg:
-  * > not True ----- not is a (predefined) function that negates a Boolean value.
-  * > (not False || True) && (False || True)
-* Haskell is case-sensitive
-*  (++) concatenates two strings.
-*  Eg: > "Hello" ++ " " ++ "world" Result: Helloworld
-```
-*Main> "hello" ++ "world"
-"helloworld"
-*Main> length ""
-0
-*Main> head "head"
-'h'
-*Main> tail "tails"
-"ails"
-*Main> last "hello"
-'o'
-*Main> init "hello"
-"hell"
-*Main> reverse "hello"
-"olleh"
-*Main> null "hello"
-False
-```
-* https://learning.edx.org/course/course-v1:DelftX+FP101x+3T2015/block-v1:DelftX+FP101x+3T2015+type@sequential+block@ea7afa9c5b924b96b05951cbcff001b2/block-v1:DelftX+FP101x+3T2015+type@vertical+block@6bff21c463674dca99826289f679d8a2
-* If you try to use logical negation on a string, you get error. > not "hello"
-* Every Haskell expression has a type, and there is an interpreter command to ask for that type.
-  > :t True Result: True :: Bool
-* In Haskell, strings are just lists of single characters, and the notation "Hello" is actually just an abbreviation for a notation that makes the list-like character much more obvious
-  > :t "Hello" Result: "Hello" :: [Char]
-  > ['H', 'e', 'l', 'l', 'o']
-  > :t ['H', 'e', 'l', 'l', 'o']
-  > 'H'
-  > :t 'H'
-  
-```
-*Main> :t head "Hello"
-   head "Hello" :: Char
-  *Main> :t tail "Hello"
-   tail "Hello" :: [Char]
-```
-* > :t length
+---
 
-length :: [a] -> Int
+### Lambda expression
+- Functions can be constructed without naming the functions by usinig lambda expressions.
+- It conveys actualy meaning of curried function.
+- They are expressions that denote functions. Function has no name, so it's an expression of function type. 
+```
+ λx = x + x [the nameless function that takes a number x and returns the result x+x]
+ \x = λx in code
+ 
+ This is math is, x -> x+x
+ ```
+ Advantage:
+-They allow you to express your intent better when you're currying functions. Example:
+```
+add x y = x + y [This is syntatic sugar]
+add = λx -> (λy -> x + y)
 
-The result is somewhat surprising. The function returns an integer (i.e., an Int), ok. But it doesn’t take a string, i.e., a [Char], but instead a [a]? What does the a mean? It means that 'a' is a type variable. We can choose any type to take a’s place! So length computes the length of any list – not just lists of characters, but also lists of numbers, or even lists of lists. 
+Add is a function that takes a parameter x, returns a function that takes a parameter y and then adds them together.
+```
+- Useful when defining functions that return functions as results.
+```
+const :: a -> b -> a
+const x _ = x
+
+const :: a -> (b -> a) [if we define a constant function so this is a function that given an 'a' will return a function that whatever b you give it, will return that a]
+const x = λ_ -> x  [defined: const of x returns a function that will, whatever you give it, just ignore it and return x]
+```
+Idiomatic haskell
+```
+odds n = map f [0..n-1]
+	where
+	     f x = x*2 + 1
+
+odds n = map (\x -> x*2 + 1) [0..n--1]
+
+For example: if I want to map a function over a list, there is no reason I should give that function here a name f. And what does f say anyway?
+So instead, what I can do, I can just pass a lambda expression to the map and that will be used to map this function over the list.
+```
+---
+
+### Sections
+> (+) 1 2
+> (+2) 1 2
+> (1+) 2
+
+Advantage:
+- No need to write lambda x -> x divided by 2. 
+- Allows you to write without inventing names.
+- (/2) = half
+- (1\) = reciprocation function
+
+Covered Chapter 4 from Programming in Haskell by Graham Hutton by reading chapters 2, 3 and 4 from the Haskell Language Specification.
