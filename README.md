@@ -127,3 +127,19 @@ False
 length :: [a] -> Int 
 
 The result is somewhat surprising. The function returns an integer (i.e., an Int), ok. But it doesn’t take a string, i.e., a [Char], but instead a [a]? What does the a mean? It means that 'a' is a type variable. We can choose any type to take a’s place! So length computes the length of any list – not just lists of characters, but also lists of numbers, or even lists of lists. 
+
+
+The following code snippet provides a simple example of how Haskell works: (Source: https://www.ionos.com/digitalguide/websites/web-development/what-is-haskell/
+)
+```
+add :: Integer -> Integer -> Integer   --function declaration
+add x y =  x + y                       --function definition
+main = do
+   putStrLn "The sum of the two numbers is:"
+   print(add 2 5)    --calling a function 
+```
+In line 1 of the code, the Haskell function is declared, which should have integers (whole numbers) as input and output values. The function is specifically defined in line 2: Two arguments are added, and the addition result should be presented. The two values “2” and “5” are supplied as input. The execution of this snippet leads to the following output:
+```
+The sum of the two numbers is: 7
+```
+
