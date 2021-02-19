@@ -115,4 +115,4 @@ double x = x*2
 palindrome xs = reverse xs == xs
 twice f x = f (f x)
 ```
-
+Completed Chapter 3,4 & 6 from here : https://www.haskell.org/definition/haskell98-report.pdf
