@@ -5,6 +5,8 @@
 
 ### Conditional Expression
 In Haskell you write a conditional you write if then else. 
+           - In Haskell conditionals are expressions, not statements.
+           - Haskell programmers rather write guarded equations than conditional expressions.
 ```   
 abs :: Int -> Int
 abs n = if n >= 0 then n else -n
@@ -30,7 +32,7 @@ signun n | n < 0        = -1
          | n == 0       = 0
          | otherwise    = 1
 ```
-Pattern matching
+Pattern matching (define functions using pattern matching)
 In Haskell you can use pattern matching directly when you define functions. _ is placeholder while doing pattern matching, ie can be anyvalue.
 ```
 not False = True
@@ -46,11 +48,12 @@ False && _ = False
 Imp because:
 - It avoids evaluating the second argument if the first argument is False.
 - Patterns are matched in order. Left to right, top to button.
+- Define functions over lists using pattern matching:
 ```
 _ && _ = False
 True && True = True
 ```
-- Patterns may ot repeat variables.
+- Patterns may not repeat variables. 
 ```
 ERROR CASE:
 
@@ -79,4 +82,41 @@ head and tail map any non-empty list to its first and remaining elements.
 > head x:_ = x = ERROR
 
 ---
-ww
+
+### Lambda expression
+- Functions can be constructed without naming the functions by usinig lambda expressions.
+- It conveys actualy meaning of curried function.
+- They are expressions that denote functions. Function has no name, so it's an expression of function type. 
+```
+ λx = x + x [the nameless function that takes a number x and returns the result x+x]
+ \x = λx in code
+ 
+ This is math is, x -> x+x
+ ```
+ Advantage:
+-They allow you to express your intent better when you're currying functions. Example:
+```
+add x y = x + y [This is syntatic sugar]
+add = λx -> (λy -> x + y)
+
+Add is a function that takes a parameter x, returns a function that takes a parameter y and then adds them together.
+```
+- Useful when defining functions that return functions as results.
+```
+const :: a -> b -> a
+const x _ = x
+
+const :: a -> (b -> a) [if we define a constant function so this is a function that given an 'a' will return a function that whatever b you give it, will return that a]
+const x = λ_ -> x  [defined: const of x returns a function that will, whatever you give it, just ignore it and return x]
+```
+Idiomatic haskell
+```
+odds n = map f [0..n-1]
+	where
+	     f x = x*2 + 1
+
+odds n = map (\x -> x*2 + 1) [0..n--1]
+
+For example: if I want to map a function over a list, there is no reason I should give that function here a name f. And what does f say anyway?
+So instead, what I can do, I can just pass a lambda expression to the map and that will be used to map this function over the list.
+```
