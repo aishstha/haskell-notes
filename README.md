@@ -116,3 +116,53 @@ palindrome xs = reverse xs == xs
 twice f x = f (f x)
 ```
 Completed Chapter 3,4 & 6 from here : https://www.haskell.org/definition/haskell98-report.pdf
+Completed Exercises from `Course/2. Types and Classes/Homework`
+Discussion overviewed 
+
+Try outs in ghic:
+```
+*Main> :t [tail, init, reverse]
+[tail, init, reverse] :: [[a] -> [a]]
+
+*Main> second xs = head (tail xs)
+*Main> second [2,3,4,5]
+3
+*Main> :t second
+second :: [a] -> a
+
+*Main> swap (x,y) = (y,x)
+*Main> :t swap
+swap :: (b, a) -> (a, b)
+
+
+*Main> double x = x * 2
+*Main> :t double
+double :: Num a => a -> a
+
+
+*Main> palindrome xs = reverse xs == xs 
+*Main> palindrome ['a','b','a']
+True
+*Main> :t palindrome 
+palindrome :: Eq a => [a] -> Bool
+
+*Main> twice f x = f (f x)
+*Main> :t twice 
+twice :: (t -> t) -> t -> t
+This means that twice is a function that takes two parameters. The first (f) is a function that takes a value of type a (where a can be any type) and returns a value of type a. The second parameter (x) that twice takes is simply a value of type a.
+```
+
+Note: 
+ * Two functions of the same type are equal iff they always return equal results for equal arguments. Hence, it is Infeasible in general; (only feasible for some functions) for function types (in general) to be instances of the Eq class
+ * ['1',['2','3']] and [1,[2,3],4] is not valid
+ * The expression ["False", "True"] has type String
+ * The expression ([False, True], False) has type ([Bool],Bool) 
+ * The expression ("1,2","3,4") has type (String,String)
+ * The expression [(1,True),(0,False)] has type [(Int,Bool)] NOT [(Int,Bool),(Int,Bool)] OR [Int,Bool]
+ * The type of f xs = take 3 (reverse xs) is [a] -> [a] 
+ * The type a -> b -> c -> d means a -> (b -> (c -> d))
+ * [[1,2]] ++ [[3,4]] RESULTS [[1,2],[3,4]]
+
+
+
+
