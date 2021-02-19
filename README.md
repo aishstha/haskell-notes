@@ -5,4 +5,5 @@
 
 ### Conditional Expression
 In Haskell you write a conditional you write if then else. 
-   abs n = if n >= 0 then n else -n
+      abs :: Int -> Int
+      abs n = if n >= 0 then n else -n
