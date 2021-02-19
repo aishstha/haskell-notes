@@ -126,5 +126,3 @@ False
 length :: [a] -> Int
 
 The result is somewhat surprising. The function returns an integer (i.e., an Int), ok. But it doesn’t take a string, i.e., a [Char], but instead a [a]? What does the a mean? It means that a is a type variable. A type variable is a bit like a joker – we can choose any type to take a’s place! So length computes the length of any list – not just lists of characters, but also lists of numbers, or even lists of lists. 
-
-* 
