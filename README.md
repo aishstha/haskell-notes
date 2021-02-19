@@ -120,3 +120,17 @@ odds n = map (\x -> x*2 + 1) [0..n--1]
 For example: if I want to map a function over a list, there is no reason I should give that function here a name f. And what does f say anyway?
 So instead, what I can do, I can just pass a lambda expression to the map and that will be used to map this function over the list.
 ```
+---
+
+### Sections
+> (+) 1 2
+> (+2) 1 2
+> (1+) 2
+
+Advantage:
+- No need to write lambda x -> x divided by 2. 
+- Allows you to write without inventing names.
+- (/2) = half
+- (1\) = reciprocation function
+
+Covered Chapter 4 from Programming in Haskell by Graham Hutton by reading chapters 2, 3 and 4 from the Haskell Language Specification.
