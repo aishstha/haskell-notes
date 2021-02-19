@@ -151,6 +151,7 @@ palindrome :: Eq a => [a] -> Bool
 twice :: (t -> t) -> t -> t
 This means that twice is a function that takes two parameters. The first (f) is a function that takes a value of type a (where a can be any type) and returns a value of type a. The second parameter (x) that twice takes is simply a value of type a.
 ```
+LINK : https://stackoverflow.com/a/54257316
 
 Note: 
  * Two functions of the same type are equal iff they always return equal results for equal arguments. Hence, it is Infeasible in general; (only feasible for some functions) for function types (in general) to be instances of the Eq class
