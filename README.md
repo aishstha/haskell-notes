@@ -78,4 +78,3 @@ head and tail map any non-empty list to its first and remaining elements.
 * x:xs patterns must be parenthesised, because application has priority over (:). 
 > head x:_ = x = ERROR
 
-
