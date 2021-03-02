@@ -18,7 +18,7 @@ It's the list of square numbers x squared where x is taken from the list one to 
 
 x <- [1..5] IS CALLED GENERATOR. The reason it's called a generator is because it defines how to generate values for x. So x is taken from that set.
 
-## Comprehensions can have multiple generators:
+### Comprehensions can have multiple generators:
 [(x,y) | x <- [1,2,3], y <-[4,5]]
 [(1,4),(1,5).....]
 + generators or multiple generators is like a nested loop where y is inner loop and the x is the outer loop. 
@@ -27,7 +27,7 @@ x <- [1..5] IS CALLED GENERATOR. The reason it's called a generator is because i
 + WE CAN WRITE CONSIDE CODE WITH GENERATORS
 For example, if we want to take a list of lists and flatten them into a single list we can do that with the following comprehension.
 
-## Using a depedant generator we can definie the library function that CONCATENATES a list of lists:
+### Using a depedant generator we can definie the library function that CONCATENATES a list of lists:
 
 concat :: [[a]] => [a]
 concat xss = [x | xs <- xss, x <- xs]
@@ -43,4 +43,33 @@ every list in this list of lists and just
 yields all the values to return
 a single list of type a, of the same element type
 as the original list.
+
+## Guards
+It allows filter in comprehension, ie to restrict the value produced by earlier generators. WHERE clause is called guard.
+[x | x <- [1..10], even x]
+if we want to have
+all the even numbers between one and ten
+we can just say x is drawn from one to ten
+and filter out only the even numbers. The result
+of this is a list [2,4,6,8,10].
+
+
+#### Function that maps a positive integer to its list of factors:
+factors :: Int -> [Int]
+factors n = 
+	[x | x <- [1..n], n `mod` x == 0 ]
+	
+> factors 15
+ 
+ [1,3,5,15]
+ 
+ #### Function that checks the number is prime
+prime :: Int -> Bool
+prime n =  factors n == [1,n]
+
+> prime 15
+False
+
+>prime 7
+ True
 
