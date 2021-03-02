@@ -134,3 +134,11 @@ Advantage:
 - (1\) = reciprocation function
 
 Covered Chapter 4 from Programming in Haskell by Graham Hutton by reading chapters 2, 3 and 4 from the Haskell Language Specification.
+
+e2 = [[[1, 2, 3]], [[3, 4, 5]]] -> type is [[[Int]]]
+e6 x y = x * y -> Num a => a -> a -> a
+e7 (x, y) = (y, x) -> e7 :: (b, a) -> (a, b)
+
+
+
+
