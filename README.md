@@ -1,10 +1,11 @@
 #  Functional programming
+ ![image](https://user-images.githubusercontent.com/22271897/112972453-00c1d600-9170-11eb-8634-f5fbf731fecd.png)
 
 Functional programming keeps 
  1. functions and data separate. 
  2. It avoids state change and mutable data, and 
  3. it treats functions as first-class citizens. 
- 
+
  
  ## 1. functions and data separate. 
 
@@ -84,5 +85,19 @@ Imagine that we have an array of employee data. We want to find out how the aver
 ## callbacks
  A callback is simply a function that you pass as an argument to an asynchronous function. When the asynchronous function finishes running, it simply calls the function we passed it. Often times the asynchronous function passes its result as an argument to the function we give it.
 ![image](https://user-images.githubusercontent.com/22271897/112969800-4fba3c00-916d-11eb-8fe4-41c58e79d92e.png)
+
+![image](https://user-images.githubusercontent.com/22271897/112970494-fa325f00-916d-11eb-8734-4f5016ebec91.png)
+ For example, it might pass the results that we obtain when reading from a database or reading a file. In Node.js especially, the standard form is to pass the result of the asynchronous function as the second argument, and any errors the function encounters as the first argument. 
+ ![image](https://user-images.githubusercontent.com/22271897/112970683-2c43c100-916e-11eb-9daa-688546fb3304.png)
+
+
+# Advance concept
+## partial application
+![image](https://user-images.githubusercontent.com/22271897/112971640-27334180-916f-11eb-8848-6071e8771d58.png)
+ These two arguments y and z represent the last two arguments of our add function. Now we can call add5 with another argument. Notice that this gives us exactly the same result as if we had simply called add with the arguments 5, 2, and 3. So in essence, partial application works by delaying the execution of a function until we have all the required arguments. 
+ 
+ ## recursion
+ ![image](https://user-images.githubusercontent.com/22271897/112972255-cb1ced00-916f-11eb-85f0-8463350a31f7.png)
+![image](https://user-images.githubusercontent.com/22271897/112972275-d112ce00-916f-11eb-94ea-a6f646af3c89.png)
 
 
